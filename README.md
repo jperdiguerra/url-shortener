@@ -11,21 +11,21 @@ URL Shortener MVP
 > SecureRandom.urlsafe_base64 5
 
 ### Paid Users
-- Paid users are manually set for by setting the user field "paid" to true
+- Paid users are manually set by setting the user field "paid" to true
 - Paid users can create custom links for its counterpart long url
 - Paid users can view all their custom links with the number of visits for each link
 
 ### Admin Users
-- Admin users are manually set for by setting the user field "admin" to true
+- Admin users are manually set by setting the user field "admin" to true
 - Admin users can access the admin page
 - Admin page shows the list of all urls, their max allowed clicks, expiry date, and link to more details
 - The details page shows the visit records for the url and a form to set the max clicks and expiry
 - The details page also includes the delete button to permanently delete the url
 - Max clicks is the allowed maximum visits for the url, once reached the url is expired
 - Expiry date is the date the url expires
-- If am expired url is accessed, the expired page is shown
+- If an expired url is accessed, the expired page is shown
 
-## Setup
+## Getting Started
 
 ### Prerequisites
 - Docker >= 19.03.8
