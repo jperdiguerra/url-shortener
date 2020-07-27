@@ -1,0 +1,18 @@
+<div class="jumbotron">
+  <div class="table-row">
+    <div class="table-cell header">Short URL</div>
+    <div class="table-cell header">Long URL</div>
+    <div class="table-cell header">Max Clicks</div>
+    <div class="table-cell header">Expiry Date</div>
+    <div class="table-cell"></div>
+  </div>
+  <% @urls.each do |url| %>
+    <div class="table-row">
+      <div class="table-cell"><%= url.short_url %></div>
+      <div class="table-cell"><%= url.long_url %></div>
+      <div class="table-cell table-cell-max-clicks"><%= url.max_clicks || ' ' %></div>
+      <div class="table-cell"><%= url.expiry_date_string %></div>
+      <div class="table-cell"><a href="/user/urls/<%= url.id %>">Details</a></div>
+    </div>
+  <% end %>
+</div>

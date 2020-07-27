@@ -1,0 +1,21 @@
+<div class="jumbotron">
+  <a href='/user/urls/new'>Create custom link</a>
+
+  <h4 class="custom-links">My Custom Links</h4>
+  <% if @urls.size > 0 %>
+    <div class="table-row columns-3">
+      <div class="table-cell header">Custom URL</div>
+      <div class="table-cell header">Long URL</div>
+      <div class="table-cell header">Visits</div>
+    </div>
+    <% @urls.each do |url| %>
+      <div class="table-row columns-3">
+        <div class="table-cell"><%= url.short_url %></div>
+        <div class="table-cell"><%= url.long_url %></div>
+        <div class="table-cell table-cell-max-clicks"><%= url.visits.size %></div>
+      </div>
+    <% end %>
+  <% else %>
+    You have no custom links.
+  <% end %>
+</div>

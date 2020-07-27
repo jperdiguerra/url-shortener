@@ -1,0 +1,69 @@
+.hidden {
+  visibility: hidden;
+}
+
+.visits {
+  margin-top: 20px;
+}
+
+.edit-link-form {
+  margin-top: 20px;
+}
+
+.max-clicks {
+  max-width: 155px;
+}
+
+.expiry-date {
+  max-width: 150px;
+}
+
+.delete {
+  margin-bottom: 30px;
+}
+
+.short-url-container {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.short-url {
+  font-weight: 700;
+  max-width: 300px;
+}
+
+.header {
+  font-weight: 700;
+}
+
+.table-row {
+  display: grid;
+  grid-template-columns: 25% 50% 10% 10% 5%;
+}
+
+.columns-3 {
+  grid-template-columns: 35% 55% 10%;
+}
+
+.table-cell{
+  word-wrap: break-word;
+  word-break: break-all;
+  max-width: 100%;
+}
+
+.table-cell-max-clicks {
+  padding-left: 35px;
+}
+
+.field-label {
+  margin-top: 20px;
+}
+
+.custom-links {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.save-btn {
+  margin-bottom: 30px;
+}

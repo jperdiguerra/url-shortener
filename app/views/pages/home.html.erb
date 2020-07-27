@@ -1,0 +1,10 @@
+<div class="jumbotron">
+  <%= form_tag({ controller: 'urls', action: 'shorten' }, id: 'shorten-form', method: 'post') do |form| %>
+    <div class="input-group mb-3">
+      <%= text_field_tag 'long_url', '', class: "form-control", placeholder: "Long URL" %>
+      <div class="input-group-append">
+        <%= submit_tag "Shorten!", class: "btn btn-primary", name: "submit" %>
+      </div>
+    </div>
+  <% end %>
+</div>

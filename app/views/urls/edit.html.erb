@@ -1,0 +1,51 @@
+<div class="jumbotron">
+  <div>
+    Short URL: <%= @url.short_url %>
+  </div>
+  <div>
+    Long URL: <%= @url.long_url %>
+  </div>
+
+  <div class="edit-link-form">
+    <%= form_tag({ controller: 'urls', action: 'update' }, id: 'edit-link-form', method: 'post', remote: true) do |form| %>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Max Clicks</span>
+        </div>
+        <%= number_field_tag 'max_clicks', @url.max_clicks, class: 'form-control max-clicks' %>
+      </div>
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="inputGroup-sizing-default">Expiry Date</span>
+        </div>
+        <input type="text" name="expiry_date" class="form-control expiry-date" value="<%= @url.expiry_date_string %>" data-provide='datepicker' >
+      </div>
+
+      <%= submit_tag "Save", class: "btn btn-primary" %>
+    <% end %>
+    <div>
+      <div class="save-success hidden">Successfully saved!</div>
+      <div class="save-failed hidden">Something went wrong :(</div>
+    </div>
+  </div>
+
+  <div class="visits">Visits (<%= @url.visits.size %>)</div>
+  <div>
+    <ol>
+      <% @url.visits.each do |visit| %>  
+        <li>
+          <div>IP Address: <%= visit.ip_address %></div>
+          <div>HTTP Referrer: <%= visit.http_referrer %></div>
+          <div>Time: <%= visit.created_at %>
+        </li>
+      <% end %>
+    </ol>
+  </div>
+
+  <%= button_to "Delete Short URL", { action: "delete", id: @url.id },
+                                      method: :delete, class: 'btn btn-danger delete',
+                                      data: { confirm: "Are you sure?" } %>
+
+  <a href="/admin">Back to list</a>
+</div>

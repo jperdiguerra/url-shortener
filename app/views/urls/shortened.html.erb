@@ -1,0 +1,17 @@
+<div class="jumbotron">
+  <div class="long-url-container">
+    <div>Long URL:</div>
+    <div name="long_url"><%= @url.long_url %></div>
+  </div>
+  
+  <div class="short-url-container">
+    <div>Your shortened URL:</div>
+    <div class="input-group mb-3">
+      <input type="text" class="form-control short-url" value="<%= @url.short_url %>" id="short-url" readonly>
+      <div class="input-group-append">
+        <button type="button" class="btn btn-primary" onclick="copyLink()">Copy</button>
+      </div>
+    </div>
+  </div>
+  <a href="/">Shorten another URL</a>
+</div>
