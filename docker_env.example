@@ -1,0 +1,6 @@
+DATABASE_NAME=rails_development
+DATABASE_USER=admin
+DATABASE_PASSWORD=1234
+DATABASE_HOST=database
+REDIS_HOST=redis
+RAILS_HOST=http://localhost:3000
