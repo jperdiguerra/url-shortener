@@ -13,7 +13,7 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
-        <a href='/'><div class="navbar-brand">URL shortener</div></a>
+        <%= link_to 'URL shortener', root_path, :class => 'navbar-brand' %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -23,11 +23,11 @@
           <% if user_signed_in? %>
             Logged in as <strong><%= current_user.email %></strong>.
             <% if current_user.paid %>
-              <%= link_to 'Custom links', '/user', :class => 'navbar-link' %> |
+              <%= link_to 'Custom links', urls_path, :class => 'navbar-link' %> |
             <% end %>
             <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
             <% if current_user.admin %>
-              <%= link_to "Admin page", '/admin', :class => 'navbar-link' %> |
+              <%= link_to "Admin page", admin_path, :class => 'navbar-link' %> |
             <% end %>
             <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
           <% else %>

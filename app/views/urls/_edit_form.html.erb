@@ -1,0 +1,33 @@
+<%= form_with model: @url, local: true do |form| %>
+
+  <% if @url.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@url.errors.count, "error") %> prohibited
+        this article from being saved:
+      </h2>
+      <ul>
+        <% @url.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Max Clicks</span>
+    </div>
+    <%= number_field_tag 'max_clicks', @url.max_clicks, class: 'form-control max-clicks' %>
+  </div>
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+      <span class="input-group-text" id="inputGroup-sizing-default">Expiry Date</span>
+    </div>
+    <input type="text" name="expiry_date" class="form-control expiry-date" value="<%= @url.expiry_date_string %>" data-provide='datepicker' >
+  </div>
+
+  <%= submit_tag "Save", class: "btn btn-primary" %>
+
+<% end %>

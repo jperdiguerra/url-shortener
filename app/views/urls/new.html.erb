@@ -1,22 +1,5 @@
 <div class="jumbotron">
-  <%= form_tag({ controller: 'urls', action: 'create' }, id: 'shorten-form', method: 'post') do |form| %>
-    <% if @url.errors.any? %>
-      <% @url.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    <% end %>
-    <label class="field-label">Long URL</label>
-    <%= text_field_tag 'long_url', '', class: "form-control", placeholder: "Long URL", required: true %>
+  <%= render 'new_form' %>
 
-    <label class="field-label">Custom URL</label>
-    <div class="input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text" id="basic-addon3"><%= "#{ENV['RAILS_HOST']}/s/" %></span>
-      </div>
-      <%= text_field_tag 'short_code', '', class: "form-control", placeholder: "Custom path", required: true %>
-    </div>
-    <%= submit_tag "Save", class: "btn btn-primary save-btn", name: "submit" %>
-  <% end %>
-
-  <a href="/user">Back to list</a>
+  <%= link_to 'Back to list', urls_path %>
 </div>

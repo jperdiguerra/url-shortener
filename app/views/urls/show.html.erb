@@ -1,0 +1,24 @@
+<div class="jumbotron">
+  <div>
+    Short URL: <%= @url.short_url %>
+  </div>
+  <div>
+    Long URL: <%= @url.long_url %>
+  </div>
+  <div>
+    Max Clicks: <%= @url.max_clicks %>
+  </div>
+  <div>
+    Expiry Date: <%= @url.expiry_date_string %>
+  </div>
+
+  <div class="visits">
+    Visits (<%= @url.visits.size %>)
+  </div>
+
+  <ul>
+    <%= render @url.visits %>
+  </ul>
+
+  <%= link_to 'Back to list', admin_path %>
+</div>

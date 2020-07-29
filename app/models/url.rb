@@ -28,10 +28,27 @@ class Url < ApplicationRecord
   end
 
   def short_url
-    @short_url ||= "#{ENV['RAILS_HOST']}/s/#{short_code}"
+    @short_url ||= "#{ENV['RAILS_HOST']}/#{short_code}"
   end
 
   def expiry_date_string
     expiry_date.present? ? expiry_date.strftime('%m/%d/%Y') : ''
+  end
+
+  def update_max_click_expiry(params)
+    date =
+      if params[:expiry_date].present?
+        begin
+          Date.strptime(params[:expiry_date],"%m/%d/%Y")
+        rescue ArgumentError
+          nil
+        end
+      else
+        nil
+      end
+    update_attributes(
+      max_clicks: params[:max_clicks],
+      expiry_date: date
+    )
   end
 end

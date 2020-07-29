@@ -1,5 +1,5 @@
 <div class="jumbotron">
-  <a href='/user/urls/new'>Create custom link</a>
+  <%= link_to 'Create custom link', new_url_path %>
 
   <h4 class="custom-links">My Custom Links</h4>
   <% if @urls.size > 0 %>

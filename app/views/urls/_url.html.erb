@@ -1,0 +1,13 @@
+<div class="table-row">
+  <div class="table-cell"><%= url.short_url %></div>
+  <div class="table-cell"><%= url.long_url %></div>
+  <div class="table-cell table-cell-max-clicks"><%= url.max_clicks || ' ' %></div>
+  <div class="table-cell"><%= url.expiry_date_string %></div>
+  <div class="table-cell"><%= link_to "Visits", url_path(url) %></div>
+  <div class="table-cell"><%= link_to "Edit", edit_url_path(url) %></div>
+  <div class="table-cell">
+    <%= link_to "Destroy", url_path(url),
+                method: :delete,
+                data: { confirm: 'Are you sure?' } %>
+  </div>
+</div>

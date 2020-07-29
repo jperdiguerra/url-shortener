@@ -1,6 +1,53 @@
 class UrlsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :edit, :update]
 
+  def index
+    redirect_to root_path unless current_user.paid
+    @urls = current_user.urls
+  end
+
+  def show
+    @url = Url.find(params[:id])
+  end
+
+  def new
+    @url = Url.new
+  end
+
+  def edit
+    @url = Url.find(params[:id])
+  end
+
+  def create
+    short_code = URI.escape(params[:short_code])
+    @url = Url.new
+    @url.short_code = short_code
+    @url.long_url = params[:long_url]
+    @url.user_id = current_user.id
+
+    if @url.save
+      redirect_to urls_path
+    else
+      render 'new'
+    end
+  end
+
+  def update
+    @url = Url.find(params[:id])
+
+    if @url.update_max_click_expiry(params)
+      redirect_to @url
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    url = Url.find_by(id: params[:id])
+    url.try(:destroy)
+    redirect_to admin_path
+  end
+
   # TODO: handle case when long_url is not long
   def shorten
     short_url = ''
@@ -24,66 +71,13 @@ class UrlsController < ApplicationController
       url.visits.create(ip_address: request.remote_ip, http_referrer: request.referer)
       redirect_to url.long_url
     else
-      redirect_to '/expired'
+      redirect_to expired_path
     end
   end
 
-  def index
-    redirect_to root_path unless current_user.paid
-    @user = current_user
-    @urls = current_user.urls
-  end
+  private
 
-  def new
-    @url = Url.new
-  end
-
-  def create
-    short_code = URI.escape(params[:short_code])
-    @url = Url.new
-    @url.short_code = short_code
-    @url.long_url = params[:long_url]
-    @url.user_id = current_user.id
-
-    if @url.save
-      redirect_to action: 'index'
-    else
-      render 'new'
+    def create_params
+      params.require(:url).permit(:short_code, :long_url)
     end
-  end
-
-  def edit
-    @url = Url.find_by(id: params[:id])
-  end
-
-  def update
-    url = Url.find_by(id: params[:id])
-    resp = {}
-    if url
-      date =
-        if params[:expiry_date].present?
-          begin
-            Date.strptime(params[:expiry_date],"%m/%d/%Y")
-          rescue ArgumentError
-            nil
-          end
-        else
-          nil
-        end
-      url.update_attributes(
-        max_clicks: params[:max_clicks],
-        expiry_date: date
-      )
-      resp[:success] = true
-    else
-      resp[:success] = false
-    end
-    render json: resp
-  end
-
-  def delete
-    url = Url.find_by(id: params[:id])
-    url.try(:destroy)
-    redirect_to '/admin'
-  end
 end
