@@ -50,7 +50,9 @@ Sample login credentials for admin and paid users can be found in seeds.rb
 
 ### Test
 
-docker exec url-shortener_app_1 rake TEST=test/integration/shorten_url_flow_test.rb
+docker exec url-shortener_app_1 rake db:create db:migrate RAILS_ENV=test
+docker exec url-shortener_app_1 rake TEST=test/integration/shorten_url_flow_test.rb RAILS_ENV=test
+docker exec url-shortener_app_1 rake TEST=test/models/url_test.rb RAILS_ENV=test
 
 ## Improvements
 
@@ -68,7 +70,71 @@ Maybe using React and its testing library is a better option.
 
 Add scheduled job that expires urls based on their expiry date. This will run at 12:00 AM everyday.
 
-### Add benchmarking/profiling
+### Benchmark
+
+Used:
+- https://github.com/wg/wrk
+- https://www.digitalocean.com/community/tutorials/how-to-benchmark-http-latency-with-wrk-on-ubuntu-14-04#step-3-—-install-wrk
+
+> wrk -t2 -c5 -d30s <short url>
+
+#### Before adding index to short code:
+
+Average at around 565 requests in 30 seconds.
+
+Run 1:
+572 requests in 30.06s, 377.05KB read
+Requests/sec:     19.03
+Transfer/sec:     12.54KB
+
+Run 2:
+569 requests in 30.05s, 375.07KB read
+Requests/sec:     18.94
+Transfer/sec:     12.48KB
+
+Run 3:
+535 requests in 30.09s, 352.66KB read
+Requests/sec:     17.78
+Transfer/sec:     11.72KB
+
+Run 4:
+577 requests in 30.02s, 380.35KB read
+Requests/sec:     19.22
+Transfer/sec:     12.67KB
+
+Run 5:
+575 requests in 30.10s, 379.03KB read
+Requests/sec:     19.10
+Transfer/sec:     12.59KB
+
+#### After adding index to short_code:
+
+Average at around 633 requests in 30 seconds. (12% increase)
+
+Run 1:
+623 requests in 30.09s, 410.67KB read
+Requests/sec:     20.71
+Transfer/sec:     13.65KB
+
+Run 2:
+628 requests in 30.02s, 413.96KB read
+Requests/sec:     20.92
+Transfer/sec:     13.79KB
+
+Run 3:
+646 requests in 30.09s, 425.83KB read
+Requests/sec:     21.47
+Transfer/sec:     14.15KB
+
+Run 4:
+642 requests in 30.09s, 423.19KB read
+Requests/sec:     21.34
+Transfer/sec:     14.07KB
+
+Run 5:
+630 requests in 30.10s, 415.28KB read
+Requests/sec:     20.93
+Transfer/sec:     13.80KB
 
 ### Address edge case scenarios
 

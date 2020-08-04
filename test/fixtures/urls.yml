@@ -1,0 +1,9 @@
+url_with_limit:
+  short_code: 'abcdefg'
+  long_url: 'https://google.com'
+  max_clicks: 3
+
+url_with_expiry:
+  short_code: 'hijklmn'
+  long_url: 'https://yahoo.com'
+  expiry_date: Date.current

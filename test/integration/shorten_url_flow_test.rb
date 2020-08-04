@@ -24,8 +24,6 @@ class ShortenUrlFlowTest < Capybara::Rails::TestCase
     last_url = Url.last
     assert last_url.long_url == long_url
     assert current_path == "/shortened/#{last_url.id}"
-
-    visit last_url.short_url
-    assert current_path == '/search'
+    assert page.has_selector?('input[id=short-url]')
   end
 end

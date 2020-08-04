@@ -5,10 +5,4 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :urls
-
-  FREE = 'freeuser@shortener.com'.freeze
-
-  def self.free_user
-    User.find_by(email: FREE)
-  end
 end
