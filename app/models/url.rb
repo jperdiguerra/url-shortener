@@ -7,12 +7,16 @@ class Url < ApplicationRecord
 
   CODE_LENGTH = 5.freeze
 
-  def generate_short_url
-    return false if long_url.nil? || persisted?
+  def self.generate_short_url(long_url)
+    return false if long_url.nil?
+    url = Url.new
+    url.long_url = add_http_protocol(long_url)
     begin
-      self.short_code = SecureRandom.urlsafe_base64 CODE_LENGTH
+      short_code = SecureRandom.urlsafe_base64 CODE_LENGTH
     end while Url.exists?(short_code: short_code)
-    short_url
+    url.short_code = short_code
+    url.save
+    url
   end
 
   def allow_redirect?
@@ -51,4 +55,10 @@ class Url < ApplicationRecord
       expiry_date: date
     )
   end
+
+  private
+
+    def self.add_http_protocol(long_url)
+      long_url[/\Ahttp(s)?:\/\//] ? long_url : "https://#{long_url}"
+    end
 end

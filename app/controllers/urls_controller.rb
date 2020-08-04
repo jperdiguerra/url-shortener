@@ -48,16 +48,11 @@ class UrlsController < ApplicationController
     redirect_to admin_path
   end
 
-  # TODO: handle case when long_url is not long
   def shorten
-    short_url = ''
     if params[:long_url].present?
-      url = Url.new
-      url.long_url = params[:long_url]
-      short_url = url.generate_short_url
-      url.save! if short_url
+      url = Url.generate_short_url(params[:long_url])
     end
-    redirect_to short_url.present? ? "/shortened/#{url.id}" : root_path
+    redirect_to url.try(:short_url).present? ? "/shortened/#{url.id}" : root_path
   end
 
   def shortened
