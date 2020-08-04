@@ -50,9 +50,9 @@ Sample login credentials for admin and paid users can be found in seeds.rb
 
 ### Test
 
-docker exec url-shortener_app_1 rake db:create db:migrate RAILS_ENV=test
-docker exec url-shortener_app_1 rake TEST=test/integration/shorten_url_flow_test.rb RAILS_ENV=test
-docker exec url-shortener_app_1 rake TEST=test/models/url_test.rb RAILS_ENV=test
+- docker exec url-shortener_app_1 rake db:create db:migrate RAILS_ENV=test
+- docker exec url-shortener_app_1 rake TEST=test/integration/shorten_url_flow_test.rb RAILS_ENV=test
+- docker exec url-shortener_app_1 rake TEST=test/models/url_test.rb RAILS_ENV=test
 
 ## Improvements
 
@@ -76,7 +76,7 @@ Used:
 - https://github.com/wg/wrk
 - https://www.digitalocean.com/community/tutorials/how-to-benchmark-http-latency-with-wrk-on-ubuntu-14-04#step-3-—-install-wrk
 
-> wrk -t2 -c5 -d30s <short url>
+> wrk -t2 -c5 -d30s [short url]
 
 #### Before adding index to short code:
 
