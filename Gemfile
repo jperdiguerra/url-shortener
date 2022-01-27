@@ -35,7 +35,7 @@ gem 'jbuilder', '~> 2.5'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-gem 'sidekiq', '~>6.0.0'
+gem 'sidekiq', '~>6.4.0'
 gem 'pg', '~>1.1.3'
 gem 'pry-rails'
 gem 'devise'
